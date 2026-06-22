@@ -1,37 +1,61 @@
 # Binary Search Tree (BST)
 
-A Binary Search Tree implementation built from scratch in C++ using modern C++ ownership principles.
+A Binary Search Tree implementation built from scratch in modern C++ using `std::unique_ptr` for ownership management.
 
 ## Features
 
-- Recursive insertion
-- Recursive search (contains)
-- In-order traversal
-- Ownership management with std::unique_ptr
-- Automatic memory cleanup
+* Recursive insertion
+* Recursive search (`contains`)
+* In-order traversal
+* Recursive size calculation
+* Recursive height calculation
+* Find minimum node
+* Recursive node deletion
+* Automatic memory management using `std::unique_ptr`
 
 ## Concepts Practiced
 
-- Recursion
-- Tree data structures
-- Smart pointers
-- Ownership semantics
-- Tree traversal
-- Recursive algorithms
+### Smart Pointers
 
-## Current Operations
+* `std::unique_ptr`
+* Ownership transfer
+* Move semantics
+* Automatic cleanup
 
-- insert()
-- contains()
-- inorder()
+### Recursion
 
-## Future Work
+* Base cases
+* Recursive traversal
+* Recursive search
+* Recursive aggregation (`size`, `height`)
+* Recursive deletion
 
-- size()
-- height()
-- remove()
-- AVL Tree balancing
+### Data Structures
 
-## What I Learned
+* Binary Search Trees
+* Tree traversal
+* Tree height
+* Successor node selection
+* Node deletion cases
 
-This project helped me understand recursive thinking, tree structures, ownership with smart pointers, and how recursive algorithms naturally fit hierarchical data.
+## Operations
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Insert    | O(h)       |
+| Contains  | O(h)       |
+| Remove    | O(h)       |
+| Height    | O(n)       |
+| Size      | O(n)       |
+
+Where `h` is the height of the tree.
+
+## Deletion Cases
+
+1. Leaf node
+2. One child
+3. Two children (in-order successor replacement)
+
+## Lessons Learned
+
+This project introduced recursive thinking, tree structures, and ownership-based memory management. The implementation uses recursive algorithms for insertion, search, traversal, size calculation, height calculation, minimum-node lookup, and deletion.
