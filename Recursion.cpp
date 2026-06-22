@@ -1,5 +1,6 @@
 #include<iostream>
 #include<memory>
+#include <algorithm>
 
 struct Node
 {
@@ -11,6 +12,9 @@ struct Node
     {}
 
 };
+void insertH(std::unique_ptr<Node>& nodeTT,int value);
+size_t sizeH(Node* node);
+size_t heightH(Node* node);
 void insertH(std::unique_ptr<Node>& nodeTT,int value);
 
 class BST{
@@ -63,28 +67,59 @@ class BST{
             return false;
         }
 
-        int size(){
-            int sizenode = 0;
+        void remove(std::unique_ptr<Node>& node, int value){
 
-
-
-
-
+            if (node == nullptr)
+            {
+                return;
+            }
+            if (value < node->value)
+            {
+                return remove(node->left, value);
+            }
+            else if (value > node->value)
+            {
+                return remove(node->right, value);
+            }
+            else{
+                if (node->left && node->right == nullptr)
+                {
+                    node.reset();
+                    return;
+                }
+                else if (node->left != nullptr && node->right == nullptr)
+                {
+                    node = std::move(node->left);
+                    return;
+                }
+                else if (node->right != nullptr && node->left == nullptr)
+                {
+                    node = std::move(node->right);
+                    return;
+                }
+                else{
+                    Node* successor = findMin(node->right.get());
+                    node->value = successor->value;
+                    remove(node->right,successor->value);
+                }
+                
+            }
             
+        }
+
+        void size(){
+            sizeH(root.get());
+        }
+
+        void height(){
+            heightH(root.get());
         }
     
 };
 
 int main(){
 
-    BST tree;
 
-    tree.insert(8);
-    tree.insert(4);
-    tree.insert(12);
-    tree.insert(2);
-    tree.insert(6);
-    
 
 
 }
@@ -109,6 +144,37 @@ void insertH(std::unique_ptr<Node>& nodeTT,int value){
         }
         
     }
+
+size_t sizeH(Node* node){
+            if (node == nullptr)
+            {
+                return 0;
+            }
+            return sizeH(node->left.get())+ sizeH(node->right.get())+ 1;
+        }
+
+size_t heightH(Node* node){
+
+            if (node == nullptr)
+            {
+                return 0;
+            }
+            return std::max(heightH(node->left.get()),heightH(node->right.get()))+ 1;
+        }
+    
+Node* findMin(Node* node){
+
+    if (node->left == nullptr)
+    {
+       return node;
+    }
+    return findMin(node->left.get());
+
+}
+
+
+
+
 
 
 
